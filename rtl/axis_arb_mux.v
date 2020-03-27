@@ -104,7 +104,7 @@ reg  [DEST_WIDTH-1:0] m_axis_tdest_int;
 reg  [USER_WIDTH-1:0] m_axis_tuser_int;
 wire                  m_axis_tready_int_early;
 
-assign s_axis_tready = (m_axis_tready_int_reg && grant_valid) << grant_encoded;
+assign s_axis_tready = {{S_COUNT-1{1'b0}},(m_axis_tready_int_reg && grant_valid)} << grant_encoded;
 
 // mux for incoming packet
 wire [DATA_WIDTH-1:0] current_s_tdata  = s_axis_tdata[grant_encoded*DATA_WIDTH +: DATA_WIDTH];
